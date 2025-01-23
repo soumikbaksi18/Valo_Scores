@@ -1,5 +1,6 @@
 import json
 from fastapi import FastAPI, HTTPException
+from fastapi import Query
 from pydantic import BaseModel
 from typing import List, Dict
 from datetime import datetime
@@ -64,4 +65,32 @@ async def calculate_performance(bet_request: BetRequest):
         "predicted_score": round(predicted_score, 2),
         "performance_score": round(avg_actual_score, 2),
         "odd_percentage": round(odd_percentage, 2)
+    }
+
+
+class UserRequest(BaseModel):
+    userId: str
+
+@app.post("/average-performance")
+async def average_performance(request: UserRequest):
+    data = load_data()
+    matches = [match for match in data.get("matchResults", []) if match["name"] == request.userId]
+
+    if not matches:
+        raise HTTPException(status_code=404, detail=f"No match history found for user {request.userId}")
+
+    metrics = [
+        "kda", "kills", "deaths", "damage",
+        "kills_per_round", "headshots",
+        "headshots_percent", "damage_per_round"
+    ]
+
+    # Compute averages for the specific user
+    total_matches = len(matches)
+    averages = {metric: sum(match[metric] for match in matches) / total_matches for metric in metrics}
+
+    return {
+        "userId": request.userId,
+        "total_matches": total_matches,
+        "average_performance": {metric: round(avg, 2) for metric, avg in averages.items()}
     }
