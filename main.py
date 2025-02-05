@@ -8,6 +8,17 @@ app = FastAPI()
 DATA_FILE = "valorant_data.json"
 GLOBAL_DATA_FILE = "global_data.json"
 
+METRIC_WEIGHTS = {
+    'kda': 0.125,
+    'kills': 0.125,
+    'deaths': 0.125,
+    'damage': 0.125,
+    'kills_per_round': 0.125,
+    'headshots': 0.125,
+    'headshots_percent': 0.125,
+    'damage_per_round': 0.125
+}
+
 class MatchPerformance(BaseModel):
     kda: Optional[float] = None
     kills: Optional[int] = None
@@ -21,7 +32,6 @@ class MatchPerformance(BaseModel):
 class BetRequest(BaseModel):
     userId: str
     predicted_performance: MatchPerformance
-    stake: Optional[int] = 15 
 
 def load_data(file_path: str):
     if not os.path.exists(file_path):
@@ -40,36 +50,66 @@ def get_user_rank(userId: str) -> Optional[str]:
 
 def fetch_rank_averages(rank: str) -> Dict[str, float]:
     global_data = load_data(GLOBAL_DATA_FILE)
+    rank_parts = rank.lower().strip().replace(" ", "")
+    base_rank = ''.join(c for c in rank_parts if c.isalpha())
+    tier = ''.join(c for c in rank_parts if c.isdigit())
+    formatted_rank = f"{base_rank.capitalize()} {tier}"
+    
     for rank_data in global_data.get("ranks", []):
-        if rank_data["rank"].lower() == rank.lower():
+        if rank_data["rank"] == formatted_rank:
             return rank_data
     return {}
 
 def calculate_normalization_constants(matches: List[Dict], metrics: List[str]) -> Dict[str, float]:
-    return {metric: 1 / max(match[metric] for match in matches) if max(match[metric] for match in matches) != 0 else 0 
-            for metric in metrics}
+    # First normalize each metric to be between 0 and 1
+    normalized = {}
+    for metric in metrics:
+        max_val = max((match[metric] for match in matches), default=0)
+        if max_val != 0:
+            normalized[metric] = 1 / max_val  
+        else:
+            normalized[metric] = 0
+    
 
-def calculate_score(performance: Dict, constants: Dict[str, float], metrics: List[str], stake: int) -> float:
+    num_metrics = len(metrics)
+    if num_metrics > 0:
+        equal_weight = 1.0 / num_metrics
+        return {metric: normalized[metric] * equal_weight for metric in metrics}
+    return normalized
+
+def calculate_score(performance: Dict, constants: Dict[str, float], metrics: List[str]) -> float:
     score = 0
     for metric in metrics:
         if metric in performance:
-            weightage = max(0.1, 1 - (stake / (performance[metric] + 1))) 
-            score += performance[metric] * constants[metric] * weightage
+            # No need for METRIC_WEIGHTS here since weightage is handled in normalization
+            score += performance[metric] * constants[metric]
     return score
 
 def get_rank_tier(rank: str) -> int:
-    rank_tiers = {
+    rank_parts = rank.lower().split()
+    base_rank = rank_parts[0]
+    
+    base_rank_values = {
         'iron': 1,
-        'bronze': 2,
-        'silver': 3,
-        'gold': 4,
-        'platinum': 5,
-        'diamond': 6,
-        'ascendant': 7,
-        'immortal': 8,
-        'radiant': 9
+        'bronze': 4,
+        'silver': 7,
+        'gold': 10,
+        'platinum': 13,
+        'diamond': 16,
+        'ascendant': 19,
+        'immortal': 22,
+        'radiant': 25
     }
-    return rank_tiers.get(rank.lower(), 0)
+    
+    base_value = base_rank_values.get(base_rank, 0)
+    if base_value == 0:
+        return 0
+        
+    if base_rank == 'radiant':
+        return base_value
+        
+    tier = int(rank_parts[1]) if len(rank_parts) > 1 else 1
+    return base_value + (tier - 1)
 
 def adjust_score_with_ai(predicted_score: float, user_avg_score: float, rank_averages: Dict[str, float], 
                         provided_metrics: List[str], user_rank: str) -> float:
@@ -114,9 +154,9 @@ async def calculate_performance(bet_request: BetRequest):
     
     provided_metrics = [metric for metric, value in bet_request.predicted_performance.dict().items() if value is not None]
     normalization_constants = calculate_normalization_constants(matches, provided_metrics)
-    actual_scores = [calculate_score(match, normalization_constants, provided_metrics, bet_request.stake) for match in matches]
+    actual_scores = [calculate_score(match, normalization_constants, provided_metrics) for match in matches]
     avg_actual_score = sum(actual_scores) / len(actual_scores) if actual_scores else 0
-    predicted_score = calculate_score(bet_request.predicted_performance.dict(), normalization_constants, provided_metrics, bet_request.stake)
+    predicted_score = calculate_score(bet_request.predicted_performance.dict(), normalization_constants, provided_metrics)
     adjusted_predicted_score = adjust_score_with_ai(predicted_score, avg_actual_score, rank_averages, provided_metrics, user_rank)
     odd_percentage = (adjusted_predicted_score / avg_actual_score) * 100 if avg_actual_score != 0 else 0
     
@@ -128,30 +168,3 @@ async def calculate_performance(bet_request: BetRequest):
         "performance_score": round(avg_actual_score, 2),
         "odd_percentage": round(odd_percentage, 2)
     }
-
-class UserRequest(BaseModel):
-    userId: str
-
-# @app.post("/average-performance")
-# async def average_performance(request: UserRequest):
-#     data = load_data()
-#     matches = [match for match in data.get("matchResults", []) if match["name"] == request.userId]
-
-#     if not matches:
-#         raise HTTPException(status_code=404, detail=f"No match history found for user {request.userId}")
-
-#     metrics = [
-#         "kda", "kills", "deaths", "damage",
-#         "kills_per_round", "headshots",
-#         "headshots_percent", "damage_per_round"
-#     ]
-
-#     # Compute averages for the specific user
-#     total_matches = len(matches)
-#     averages = {metric: sum(match[metric] for match in matches) / total_matches for metric in metrics}
-
-#     return {
-#         "userId": request.userId,
-#         "total_matches": total_matches,
-#         "average_performance": {metric: round(avg, 2) for metric, avg in averages.items()}
-#     }

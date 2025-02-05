@@ -3,7 +3,7 @@
     {
       "rank": "Iron 1",
       "kda": 0.58,
-      "kills": 11,
+      "kills": 8,
       "deaths": 19,
       "damage": 2395,
       "kills_per_round": 0.5,
@@ -14,7 +14,7 @@
     {
       "rank": "Iron 2",
       "kda": 0.8,
-      "kills": 13,
+      "kills": 10,
       "deaths": 17,
       "damage": 2720,
       "kills_per_round": 0.8,
@@ -25,7 +25,7 @@
     {
       "rank": "Iron 3",
       "kda": 0.9,
-      "kills": 14,
+      "kills": 12,
       "deaths": 16,
       "damage": 2860,
       "kills_per_round": 0.85,
@@ -58,7 +58,7 @@
     {
       "rank": "Bronze 3",
       "kda": 1.25,
-      "kills": 17.5,
+      "kills": 18,
       "deaths": 14,
       "damage": 3300,
       "kills_per_round": 1.05,
@@ -69,7 +69,7 @@
     {
       "rank": "Silver 1",
       "kda": 1.3,
-      "kills": 18,
+      "kills": 20,
       "deaths": 14,
       "damage": 3400,
       "kills_per_round": 1.1,
@@ -80,7 +80,7 @@
     {
       "rank": "Silver 2",
       "kda": 1.4,
-      "kills": 20,
+      "kills": 22,
       "deaths": 14,
       "damage": 3600,
       "kills_per_round": 1.2,
@@ -91,7 +91,7 @@
     {
       "rank": "Silver 3",
       "kda": 1.45,
-      "kills": 21,
+      "kills": 25,
       "deaths": 14.5,
       "damage": 3700,
       "kills_per_round": 1.25,
@@ -102,7 +102,7 @@
     {
       "rank": "Gold 1",
       "kda": 1.5,
-      "kills": 22,
+      "kills": 28,
       "deaths": 15,
       "damage": 3800,
       "kills_per_round": 1.3,
@@ -113,7 +113,7 @@
     {
       "rank": "Gold 2",
       "kda": 1.6,
-      "kills": 24,
+      "kills": 30,
       "deaths": 15,
       "damage": 4000,
       "kills_per_round": 1.4,
@@ -124,7 +124,7 @@
     {
       "rank": "Gold 3",
       "kda": 1.65,
-      "kills": 25,
+      "kills": 32,
       "deaths": 15,
       "damage": 4100,
       "kills_per_round": 1.45,
@@ -135,7 +135,7 @@
     {
       "rank": "Platinum 1",
       "kda": 1.7,
-      "kills": 26,
+      "kills": 35,
       "deaths": 15,
       "damage": 4200,
       "kills_per_round": 1.5,
@@ -146,7 +146,7 @@
     {
       "rank": "Platinum 2",
       "kda": 1.8,
-      "kills": 28,
+      "kills": 36,
       "deaths": 15,
       "damage": 4400,
       "kills_per_round": 1.6,
@@ -157,7 +157,7 @@
     {
       "rank": "Platinum 3",
       "kda": 1.9,
-      "kills": 29,
+      "kills": 39,
       "deaths": 15,
       "damage": 4500,
       "kills_per_round": 1.65,
@@ -168,7 +168,7 @@
     {
       "rank": "Diamond 1",
       "kda": 2.0,
-      "kills": 30,
+      "kills": 40,
       "deaths": 15,
       "damage": 4600,
       "kills_per_round": 1.7,
@@ -179,7 +179,7 @@
     {
       "rank": "Diamond 2",
       "kda": 2.1,
-      "kills": 32,
+      "kills": 42,
       "deaths": 15,
       "damage": 4800,
       "kills_per_round": 1.8,
@@ -190,7 +190,7 @@
     {
       "rank": "Diamond 3",
       "kda": 2.15,
-      "kills": 33,
+      "kills": 43,
       "deaths": 15,
       "damage": 4900,
       "kills_per_round": 1.85,
@@ -201,7 +201,7 @@
     {
       "rank": "Ascendant 1",
       "kda": 2.2,
-      "kills": 34,
+      "kills": 45,
       "deaths": 15,
       "damage": 5000,
       "kills_per_round": 1.9,
@@ -212,7 +212,7 @@
     {
       "rank": "Ascendant 2",
       "kda": 2.3,
-      "kills": 36,
+      "kills": 47,
       "deaths": 15,
       "damage": 5200,
       "kills_per_round": 2.0,
@@ -223,7 +223,7 @@
     {
       "rank": "Ascendant 3",
       "kda": 2.4,
-      "kills": 37,
+      "kills": 48,
       "deaths": 15,
       "damage": 5300,
       "kills_per_round": 2.05,
@@ -234,7 +234,7 @@
     {
       "rank": "Immortal 1",
       "kda": 2.5,
-      "kills": 38,
+      "kills": 50,
       "deaths": 15,
       "damage": 5400,
       "kills_per_round": 2.1,
@@ -245,7 +245,7 @@
     {
       "rank": "Immortal 2",
       "kda": 2.6,
-      "kills": 40,
+      "kills": 55,
       "deaths": 15,
       "damage": 5600,
       "kills_per_round": 2.2,
@@ -256,7 +256,7 @@
     {
       "rank": "Immortal 3",
       "kda": 2.8,
-      "kills": 42,
+      "kills": 58,
       "deaths": 15,
       "damage": 5800,
       "kills_per_round": 2.35,
@@ -267,7 +267,7 @@
     {
       "rank": "Radiant",
       "kda": 3.0,
-      "kills": 45,
+      "kills": 60,
       "deaths": 15,
       "damage": 6000,
       "kills_per_round": 2.5,
