@@ -23,6 +23,17 @@
       "damage_per_round": 120
     },
     {
+      "rank": "Iron 3",
+      "kda": 0.9,
+      "kills": 14,
+      "deaths": 16,
+      "damage": 2860,
+      "kills_per_round": 0.85,
+      "headshots": 12,
+      "headshots_percent": 26.2,
+      "damage_per_round": 125
+    },
+    {
       "rank": "Bronze 1",
       "kda": 1.0,
       "kills": 15,
@@ -43,6 +54,17 @@
       "headshots": 16,
       "headshots_percent": 28.0,
       "damage_per_round": 135
+    },
+    {
+      "rank": "Bronze 3",
+      "kda": 1.25,
+      "kills": 17.5,
+      "deaths": 14,
+      "damage": 3300,
+      "kills_per_round": 1.05,
+      "headshots": 17,
+      "headshots_percent": 29.0,
+      "damage_per_round": 137.5
     },
     {
       "rank": "Silver 1",
@@ -67,6 +89,17 @@
       "damage_per_round": 145
     },
     {
+      "rank": "Silver 3",
+      "kda": 1.45,
+      "kills": 21,
+      "deaths": 14.5,
+      "damage": 3700,
+      "kills_per_round": 1.25,
+      "headshots": 21,
+      "headshots_percent": 32.2,
+      "damage_per_round": 147.5
+    },
+    {
       "rank": "Gold 1",
       "kda": 1.5,
       "kills": 22,
@@ -87,6 +120,17 @@
       "headshots": 24,
       "headshots_percent": 34.5,
       "damage_per_round": 155
+    },
+    {
+      "rank": "Gold 3",
+      "kda": 1.65,
+      "kills": 25,
+      "deaths": 15,
+      "damage": 4100,
+      "kills_per_round": 1.45,
+      "headshots": 25,
+      "headshots_percent": 35.2,
+      "damage_per_round": 157.5
     },
     {
       "rank": "Platinum 1",
@@ -111,6 +155,17 @@
       "damage_per_round": 165
     },
     {
+      "rank": "Platinum 3",
+      "kda": 1.9,
+      "kills": 29,
+      "deaths": 15,
+      "damage": 4500,
+      "kills_per_round": 1.65,
+      "headshots": 29,
+      "headshots_percent": 38.2,
+      "damage_per_round": 167.5
+    },
+    {
       "rank": "Diamond 1",
       "kda": 2.0,
       "kills": 30,
@@ -131,6 +186,17 @@
       "headshots": 32,
       "headshots_percent": 40.5,
       "damage_per_round": 175
+    },
+    {
+      "rank": "Diamond 3",
+      "kda": 2.15,
+      "kills": 33,
+      "deaths": 15,
+      "damage": 4900,
+      "kills_per_round": 1.85,
+      "headshots": 33,
+      "headshots_percent": 41.2,
+      "damage_per_round": 177.5
     },
     {
       "rank": "Ascendant 1",
@@ -155,6 +221,17 @@
       "damage_per_round": 185
     },
     {
+      "rank": "Ascendant 3",
+      "kda": 2.4,
+      "kills": 37,
+      "deaths": 15,
+      "damage": 5300,
+      "kills_per_round": 2.05,
+      "headshots": 37,
+      "headshots_percent": 44.2,
+      "damage_per_round": 187.5
+    },
+    {
       "rank": "Immortal 1",
       "kda": 2.5,
       "kills": 38,
@@ -175,6 +252,17 @@
       "headshots": 40,
       "headshots_percent": 46.5,
       "damage_per_round": 195
+    },
+    {
+      "rank": "Immortal 3",
+      "kda": 2.8,
+      "kills": 42,
+      "deaths": 15,
+      "damage": 5800,
+      "kills_per_round": 2.35,
+      "headshots": 42,
+      "headshots_percent": 48.2,
+      "damage_per_round": 197.5
     },
     {
       "rank": "Radiant",
