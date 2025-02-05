@@ -83,20 +83,15 @@ def adjust_score_with_ai(predicted_score: float, user_avg_score: float, rank_ave
     
     for metric in provided_metrics:
         if metric in rank_averages and user_avg_score > 0:
-            # Calculate how much the prediction deviates from rank average
             deviation = (predicted_score / user_avg_score) - 1
             
-            # Higher ranks should have stricter adjustments
-            rank_scaling = 1 + (rank_tier / 10)  # Higher ranks get more aggressive scaling
+            rank_scaling = 1 + (rank_tier / 10)  
             
             if deviation > 0:
-                # For positive deviations (predicted better than average)
                 adjustment_factor *= (1 - (deviation * 0.2 * rank_scaling))
             else:
-                # For negative deviations (predicted worse than average)
                 adjustment_factor *= (1 + (abs(deviation) * 0.1 * rank_scaling))
             
-            # Ensure we don't adjust too extremely
             adjustment_factor = max(0.5, min(1.5, adjustment_factor))
     
     return predicted_score * adjustment_factor
